@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include partials/head.ejs %>
+</head>
+<body class="uk-flex uk-flex-column">
+<% include partials/header.ejs %>
+<main>
+    <section class="uk-section uk-section-small uk-section-secondary">
+        <h2 class="uk-heading-primary uk-heading-bullet uk-text-center">Existing Users</h2>
+    </section>
+    <p><%= students['name'] %></p>
+    <div class="uk-flex uk-container uk-flex-around">
+        <% for(var student in students){ %>
+        <div class="uk-card uk-card-default uk-card-body uk-animation-fade">
+            <div class="uk-card-header">
+                <h4 class="uk-card-title uk-card-hover">Name: <%= students[student].name %></h4>
+            </div>
+            <p>Sex: <%= students[student].gender %></p>
+            <div class="uk-card-footer">
+                <button class="uk-button uk-button-secondary view" id=<%= students[student]._id %>>View Details</button>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <!--Modal For Viewing More-->
+    <div class="uk-modal" id="modal-full">
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-full uk-close-large" type="button"></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title"></h2>
+            </div>
+            <div class="uk-modal-body"></div>
+            <div class="uk-modal-footer"></div>
+        </div>
+
+    </div>
+</main>
+<% include partials/footer.ejs %>
+</body>
+</html>

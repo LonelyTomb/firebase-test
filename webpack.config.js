@@ -9,10 +9,7 @@ const path = require('path')
  *
  */
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
-
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 /*
  * We've enabled commonsChunkPlugin for you. This allows your app to
@@ -23,43 +20,66 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
  *
  */
 
+/*
+ * We've enabled ExtractTextPlugin for you. This allows your app to
+ * use css modules that will be moved into a separate CSS file instead of inside
+ * one of your module entries!
+ *
+ * https://github.com/webpack-contrib/extract-text-webpack-plugin
+ *
+ */
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 module.exports = {
   entry: {
-    app: "./public/javascript.js",
-    uikit: "uikit,"./public/stylesheets".js"
+    app: path.join(__dirname, 'public/javascripts/app.js'),
+    uikit: ['uikit', path.join(__dirname, 'public/stylesheets/style.scss')]
   },
 
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].[chunkhash].js',
+    path: path.resolve(__dirname, 'public/dist')
   },
 
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
 
-      options: {
-        presets: ['es2015']
+        options: {
+          presets: ['es2015']
+        }
+      },
+      {
+        test: /\.(scss|css)$/,
+
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ],
+          fallback: 'style-loader'
+        })
       }
-    }, {
-      test: /\.(scss|css)$/,
-
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader'
-      }, {
-        loader: 'sass-loader'
-      }]
-    }]
+    ]
   },
 
   plugins: [
     new UglifyJSPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({name:'app',filename:'app-[hash].min.js'}),
-    new webpack.optimize.CommonsChunkPlugin({name:'uikit',filename:'uikit-[hash].min.js'})
+    new ExtractTextPlugin('css/style.css'),
   ]
 }
