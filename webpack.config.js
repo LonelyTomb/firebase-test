@@ -34,7 +34,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     app: path.join(__dirname, 'public/javascripts/app.js'),
-    uikit: ['uikit', path.join(__dirname, 'public/stylesheets/style.scss')]
+    uikit: ['uikit', path.join(__dirname, 'public/stylesheets/style.scss')],
+    'uikit-icons': './node_modules/uikit/dist/js/uikit-icons.js'
   },
 
   output: {
