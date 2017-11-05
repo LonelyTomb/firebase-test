@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include partials/head.ejs %>
+</head>
+<body class="uk-flex uk-flex-column">
+<% include partials/header.ejs %>
+<main>
+    <% if(message !== ''){ %>
+    <script>
+      UIkit.notification({
+        message: `<%= message %>`,
+        status: 'warning',
+        pos: 'top-center',
+        timeout: 5000
+      });
+    </script>
+    <% } %>
+    <section class="uk-section uk-section-default">
+        <h2 class="uk-heading-primary uk-heading-bullet uk-heading-divider">Admin Login</h2>
+    </section>
+    <section class="uk-section">
+        <form action="/login" class="uk-form-stacked uk-card uk-container uk-card-body uk-card-secondary" method="post">
+            <div>
+                <label for="username" class="uk-form-label">Username</label>
+                <div class="uk-form-controls-text">
+                    <input type="text" name="username" id="username" class="uk-input" required>
+                </div>
+            </div>
+            <div>
+                <label for="password" class="uk-form-label">Password</label>
+                <div class="uk-form-controls">
+                    <input type="password" name="password" id="password" class="uk-input" required>
+                </div>
+            </div>
+            <div class="uk-divider-icon"></div>
+            <div>
+                <button type="submit" class="uk-button uk-button-primary">Submit <span uk-icon="icon: play-circle"></span></button>
+
+            </div>
+        </form>
+    </section>
+</main>
+<% include partials/footer.ejs %>
+</body>
+</html>

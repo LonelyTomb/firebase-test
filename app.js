@@ -5,31 +5,41 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const sassMiddleware = require('node-sass-middleware')
+const session = require('express-session')
 
 let index = require('./routes/index')
 let users = require('./routes/users')
 let register = require('./routes/register')
+let login = require('./routes/login')
+let edit = require('./routes/edit')
 
 const app = express()
 const connection = require('./mongo-init')
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public/stylesheets'),
+  dest: path.join(__dirname, 'public/dist/css'),
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
+}))
+app.set('trust proxy', 1) // trust first proxy
+
+app.use(session({
+  secret: 'cartographer',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: false}
 }))
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -37,6 +47,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', index)
 app.use('/users', users)
 app.use('/register', register)
+app.use('/login', login)
+app.use('/edit', edit)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

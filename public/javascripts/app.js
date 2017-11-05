@@ -1,4 +1,4 @@
-const UIkit = require('uikit')
+window.UIkit = require('uikit')
 // const Icons = require('uikit/dist/js/uikit-icons')
 
 // UIkit.use(Icons)
@@ -9,6 +9,7 @@ function el (element) {
 
 (() => {
   'use strict'
+  // Read Process
   let view = document.getElementsByClassName('view')
   for (let i = 0; i < view.length; i++) {
     view[i].addEventListener('click', () => {
@@ -21,9 +22,14 @@ function el (element) {
       }).then(res => {
         if (res.ok) return res.json()
       }).then(data => {
-        console.log(data)
+        el('.name').innerHTML = `<span>${data.name}</span>`
+        el('.dob').innerHTML = data.dob
+        el('.gender').innerHTML = data.gender
+        el('.phone').innerHTML = data.phone
+        el('.email').innerHTML = data.email
+        UIkit.modal('#modal-full').show()
       })
-      UIkit.modal('#modal-full').show()
     })
   }
+  // Login Process
 })()

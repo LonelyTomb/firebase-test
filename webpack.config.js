@@ -56,6 +56,13 @@ module.exports = {
         }
       },
       {
+        test: require.resolve('uikit'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'UIkit'
+        }]
+      },
+      {
         test: /\.(scss|css)$/,
 
         use: ExtractTextPlugin.extract({
@@ -82,5 +89,8 @@ module.exports = {
   plugins: [
     new UglifyJSPlugin(),
     new ExtractTextPlugin('css/style.css'),
+    new webpack.ProvidePlugin({
+      UIkit: 'uikit'
+    })
   ]
 }
