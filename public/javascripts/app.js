@@ -31,7 +31,7 @@ function el (element) {
       })
     })
   }
-  // Update Process
+  // Update Modal Process
   let update = document.getElementsByClassName('update')
   for (let i = 0; i < update.length; i++) {
     update[i].addEventListener('click', () => {
@@ -44,12 +44,50 @@ function el (element) {
       }).then(res => {
         if (res.ok) return res.json()
       }).then(data => {
-        el('.name').innerHTML = `<span>${data.name}</span>`
+        el('._id').value = data._id
+        el('.name').value = data.name
         el('.dob').value = data.dob
-        el('.gender').value = data.gender
+        let gender = data.gender.toLowerCase()
+        el(`#${gender}`).checked = true
         el('.phone').value = data.phone
         el('.email').value = data.email
+        el('.department').value = data.department
         UIkit.modal('#modal-full').show()
+      })
+    })
+  }
+  // Update Record Process
+  if (el('#save') !== null) {
+    el('#save').addEventListener('click', () => {
+      let _id = el('._id').value
+      let name = el('.name').value
+      let dob = el('.dob').value
+      let gender
+      if (el('#male').checked) {
+        gender = 'Male'
+      } else {
+        gender = 'Female'
+      }
+      let phone = el('.phone').value
+      let email = el('.email').value
+      let department = el('.department').value
+
+      fetch('edit/save', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          '_id': _id,
+          'name': name,
+          'dob': dob,
+          'gender': gender,
+          'phone': phone,
+          'email': email,
+          'department': department
+        })
+      }).then(res => {
+        if (res.ok) return res.json
+      }).then(data => {
+        window.location.reload(true)
       })
     })
   }

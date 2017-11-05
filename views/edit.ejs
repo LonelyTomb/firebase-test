@@ -30,31 +30,61 @@
     </div>
 
     <!--Modal For Viewing More-->
-    <div class="uk-modal" id="modal-full">
+    <div class="uk-modal uk-modal-full" id="modal-full">
         <div class="uk-modal-dialog">
-            <button class="uk-modal-close-outside" type="button" uk-close></button>
-            <div class="uk-modal-header uk-background-secondary uk-light">
-                <h2 class="uk-modal-title uk-heading-line uk-text-center name"></h2>
-            </div>
-            <div class="uk-modal-body">
-                <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
-                    <p class="uk-label uk-margin-remove uk-label-success">Date Of Birth</p>
-                    <p class=""><input type="date" class="dob uk-input"></p>
-                    <p class="uk-label uk-margin-remove uk-label-success">Gender</p>
-                    <p class=""><input type="text" class="gender uk-input"></p>
-                </section>
-                <div class="uk-divider-icon"></div>
-                <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
-                    <p class="uk-label uk-margin-remove uk-label-success">Phone number</p>
-                    <p class=""><input type="text" class="phone uk-input"></p>
-                    <p class="uk-label uk-margin-remove uk-label-success">Email</p>
-                    <p class=""><input type="email" class="email uk-input"></p>
-                </section>
-            </div>
-            <div class="uk-modal-footer">
-                <button class="uk-modal-close uk-button uk-button-secondary uk-align-left" type="button">save</button>
-                <button class="uk-modal-close uk-button uk-button-secondary uk-align-right" type="button">Close</button>                
-            </div>
+            <!--<button class="uk-modal-close" type="button" uk-close></button>-->
+            <form>
+                <div class="uk-modal-header uk-background-secondary uk-light">
+                    <label for="name" class="uk-label uk-margin-remove uk-label-success">Full Name</label>
+                    <h2 class="uk-modal-title uk-heading-line uk-text-center">
+                        <input type="text" id="name"
+                               class="name uk-input uk-form-blank uk-align-center uk-form-width-medium" name="name"
+                               placeholder="Full Name">
+                    </h2>
+                    <input type="hidden" name="_id" class="_id">
+                </div>
+                <div class="uk-modal-body" uk-overflow-auto>
+                    <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
+                        <label for="department" class="uk-label uk-margin-remove uk-label-success">Department</label>
+                        <p class=""><input type="text" class="department uk-input" id="department" name="department">
+                        </p>
+                    </section>
+
+                    <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
+                        <label for="dob" class="uk-label uk-margin-remove uk-label-success">Date Of Birth</label>
+                        <p class=""><input type="date" class="dob uk-input" id="dob" name="dob"></p>
+                        <label for="gender" class="uk-label uk-margin-remove uk-label-success">Gender</label>
+                        <div class="uk-flex uk-flex-row uk-margin-left uk-margin-top">
+                            <div class="uk-margin-right">
+                                <label for="male" class="uk-form-label">Male
+                                    <input type="radio" name="gender" id="male" class="uk-radio" value="Male">
+                                </label>
+                            </div>
+                            <div>
+                                <label for="female" class="uk-form-label">Female
+                                    <input type="radio" name="gender" id="female" class="uk-radio" value="Female">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="uk-divider-icon"></div>
+
+                    <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
+                        <label for="phone" class="uk-label uk-margin-remove uk-label-success">Phone number</label>
+                        <p class=""><input type="text" class="phone uk-input" id="phone" name="phone"></p>
+                        <label for="email" class="uk-label uk-margin-remove uk-label-success">Email</label>
+                        <p class=""><input type="email" class="email uk-input" name="email" id="email"></p>
+                    </section>
+
+                </div>
+                <div class="uk-modal-footer">
+                    <button class="uk-button uk-button-secondary uk-align-left save" type="button" id="save">save
+                    </button>
+                    <button class="uk-modal-close uk-button uk-button-secondary uk-align-right" type="button">Close
+                    </button>
+                </div>
+            </form>
         </div>
 
     </div>
