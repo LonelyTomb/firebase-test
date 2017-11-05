@@ -11,6 +11,8 @@ router.get('/', (req, res, next) => {
   })
 })
 
+// View Selected Profile
+
 router.post('/view', (req, res, next) => {
   'use strict'
   mongodb.database.collection('students').findOne({

@@ -91,4 +91,35 @@ function el (element) {
       })
     })
   }
+
+  let remove = document.getElementsByClassName('delete')
+  if (remove !== null) {
+    // el('#delete').addEventListener('click', () => {
+    //
+    // })
+    for (var i = 0; i < remove.length; i++) {
+      UIkit.util.on(remove[i], 'click', function (e) {
+        e.preventDefault()
+        e.target.blur()
+        console.log( e.target.parentNode.id)
+        let name = e.target.parentNode.dataset.title
+        UIkit.modal.confirm(`Do you wish to delete ${name}'s profile`).then(() => {
+          fetch('edit/remove', {
+            method: 'delete',
+            headers: {'Content-Type': 'application/json'},
+            body: {
+              _id: e.target.parentNode.id
+            }
+          }).then(res => {
+            if (res.ok) return res.json()
+          }).then(data => {
+            console.log(data)
+            window.location.reload(true)
+          })
+        }, function () {
+          console.log('')
+        })
+      })
+    }
+  }
 })()

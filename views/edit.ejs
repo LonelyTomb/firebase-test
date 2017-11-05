@@ -12,14 +12,14 @@
     <p><%= students['name'] %></p>
     <div class="uk-flex uk-container uk-flex-around uk-flex-wrap">
         <% for(var student in students){ %>
-        <div class="uk-card uk-card-default uk-card-body uk-animation-fade uk-box-shadow-bottom">
+        <div class="uk-card uk-card-default uk-card-body uk-animation-fade uk-box-shadow-bottom uk-margin-top">
             <div class="uk-card-header">
-                <h4 class="uk-card-title">Name: <%= students[student].name %></h4>
+                <h4 class="uk-card-title">Name: <span class="title-name"><%= students[student].name %></span></h4>
             </div>
             <p>Department: <%= students[student].department %></p>
             <p>Sex: <%= students[student].gender %></p>
             <div class="uk-card-footer">
-                <div class="uk-button-group" id="<%= students[student]._id %>">
+                <div class="uk-button-group" id="<%= students[student]._id %>" data-title=<%= students[student].name %>>
                     <button class="uk-button uk-button-primary update uk-box-shadow-hover-small">Edit Details
                     </button>
                     <button class="uk-button uk-button-danger delete uk-box-shadow-hover-small">Remove</button>

@@ -3,11 +3,13 @@ const router = express.Router()
 const mongodb = require('./../mongo-init')
 const session = require('express-session')
 
+// Render Login Page
 router.get('/', (req, res) => {
   'use strict'
   res.render('login', {title: 'Login', message: ''})
 })
 
+// Process login details
 router.post('/', (req, res) => {
   'use strict'
   mongodb.database.collection('admins').findOne({

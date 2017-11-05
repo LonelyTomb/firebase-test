@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 
 router.use(bodyParser.json())
 
+// Render All Profiles
 router.get('/', (req, res) => {
   'use strict'
   mongodb.database.collection('admins').findOne({
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
   })
 })
 
+// Render Selected Profile
 router.post('/view', (req, res, next) => {
   'use strict'
   mongodb.database.collection('students').findOne({
@@ -35,6 +37,7 @@ router.post('/view', (req, res, next) => {
   })
 })
 
+// Update Selected Profile
 router.put('/save', (req, res, next) => {
   'use strict'
   mongodb.database.collection('students').findOneAndUpdate({
@@ -51,6 +54,16 @@ router.put('/save', (req, res, next) => {
   }, (err, result) => {
     if (err) console.log(err)
     res.send(result)
+  })
+})
+
+router.delete('/remove', (req, res, next) => {
+  'use strict'
+  mongodb.database.collection('students').findOneAndDelete({
+    _id: mongodb.ObjectId(req.body._id)
+  }, (err, result) => {
+    if (err) console.log(err)
+    res.send({message: 'Profile deleted successfully'})
   })
 })
 module.exports = router

@@ -9,6 +9,7 @@ let uri = 'mongodb://lonelytomb:construct8@ds243055.mlab.com:43055/srq'
 let db = MongoClient.connect(uri, (err, database) => {
   'use strict'
   if (err) return console.log(err)
+  console.log('db connected')
   module.exports.database = database
   return database
 })
