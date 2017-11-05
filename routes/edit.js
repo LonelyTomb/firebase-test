@@ -22,4 +22,14 @@ router.get('/', (req, res) => {
   })
 })
 
+router.post('/view', (req, res, next) => {
+  'use strict'
+  mongodb.database.collection('students').findOne({
+    _id: mongodb.ObjectId(req.body.id)
+  }, (err, result) => {
+    if (err) console.log(err)
+    res.send(result)
+  })
+})
+
 module.exports = router

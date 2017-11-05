@@ -19,10 +19,10 @@
             <p>Department: <%= students[student].department %></p>
             <p>Sex: <%= students[student].gender %></p>
             <div class="uk-card-footer">
-                <div class="uk-button-group">
-                    <button class="uk-button uk-button-primary edit" id=<%= students[student]._id %>>Edit Details
+                <div class="uk-button-group" id="<%= students[student]._id %>">
+                    <button class="uk-button uk-button-primary update uk-box-shadow-hover-small">Edit Details
                     </button>
-                    <button class="uk-button uk-button-danger delete" id=<%= students[student]._id %>>Remove</button>
+                    <button class="uk-button uk-button-danger delete uk-box-shadow-hover-small">Remove</button>
                 </div>
             </div>
         </div>
@@ -39,20 +39,21 @@
             <div class="uk-modal-body">
                 <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
                     <p class="uk-label uk-margin-remove uk-label-success">Date Of Birth</p>
-                    <p class="dob"></p>
+                    <p class=""><input type="date" class="dob uk-input"></p>
                     <p class="uk-label uk-margin-remove uk-label-success">Gender</p>
-                    <p class="gender"></p>
+                    <p class=""><input type="text" class="gender uk-input"></p>
                 </section>
                 <div class="uk-divider-icon"></div>
                 <section class="uk-section uk-section-muted uk-margin-remove uk-padding-remove">
                     <p class="uk-label uk-margin-remove uk-label-success">Phone number</p>
-                    <p class="phone"></p>
+                    <p class=""><input type="text" class="phone uk-input"></p>
                     <p class="uk-label uk-margin-remove uk-label-success">Email</p>
-                    <p class="email"></p>
+                    <p class=""><input type="email" class="email uk-input"></p>
                 </section>
             </div>
             <div class="uk-modal-footer">
-                <button class="uk-modal-close uk-button uk-button-secondary" type="button">Close</button>
+                <button class="uk-modal-close uk-button uk-button-secondary uk-align-left" type="button">save</button>
+                <button class="uk-modal-close uk-button uk-button-secondary uk-align-right" type="button">Close</button>                
             </div>
         </div>
 

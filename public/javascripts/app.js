@@ -31,5 +31,26 @@ function el (element) {
       })
     })
   }
-  // Login Process
+  // Update Process
+  let update = document.getElementsByClassName('update')
+  for (let i = 0; i < update.length; i++) {
+    update[i].addEventListener('click', () => {
+      fetch('/edit/view', {
+        method: 'post',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({
+          id: update[i].parentNode.id
+        })
+      }).then(res => {
+        if (res.ok) return res.json()
+      }).then(data => {
+        el('.name').innerHTML = `<span>${data.name}</span>`
+        el('.dob').value = data.dob
+        el('.gender').value = data.gender
+        el('.phone').value = data.phone
+        el('.email').value = data.email
+        UIkit.modal('#modal-full').show()
+      })
+    })
+  }
 })()

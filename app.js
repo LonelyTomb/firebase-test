@@ -33,12 +33,12 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
 }))
-app.set('trust proxy', 1) // trust first proxy
 
 app.use(session({
   secret: 'cartographer',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
+  maxAge: Date.now() + (60 * 60 * 12),
   cookie: {secure: false}
 }))
 
