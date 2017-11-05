@@ -101,15 +101,15 @@ function el (element) {
       UIkit.util.on(remove[i], 'click', function (e) {
         e.preventDefault()
         e.target.blur()
-        console.log( e.target.parentNode.id)
+        console.log(e.target.parentNode.id)
         let name = e.target.parentNode.dataset.title
         UIkit.modal.confirm(`Do you wish to delete ${name}'s profile`).then(() => {
           fetch('edit/remove', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
-            body: {
+            body: JSON.stringify({
               _id: e.target.parentNode.id
-            }
+            })
           }).then(res => {
             if (res.ok) return res.json()
           }).then(data => {

@@ -59,11 +59,13 @@ router.put('/save', (req, res, next) => {
 
 router.delete('/remove', (req, res, next) => {
   'use strict'
-  mongodb.database.collection('students').findOneAndDelete({
-    _id: mongodb.ObjectId(req.body._id)
+  mongodb.database.collection('students').remove({
+    '_id': mongodb.ObjectId(req.body._id)
   }, (err, result) => {
     if (err) console.log(err)
+    console.log(req.body)
     res.send({message: 'Profile deleted successfully'})
   })
 })
+
 module.exports = router
