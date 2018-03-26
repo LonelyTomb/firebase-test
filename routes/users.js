@@ -1,13 +1,17 @@
 let express = require('express')
 let router = express.Router()
-const mongodb = require('./../mongo-init')
+const pouchdb = require('./../mongo-init')
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-  mongodb.database.collection('students').find().toArray((err, result) => {
+  pouchdb.db.allDocs({
+    include_docs: true
+  }).then((result) => {
     'use strict'
-    if (err) console.log(err)
-    res.render('users', {title: 'Users', students: result})
+    // console.log(result.rows)
+    res.render('users', {title: 'Users', students: result.rows})
+  }).catch((err) => {
+    console.log(err)
   })
 })
 
@@ -15,11 +19,14 @@ router.get('/', (req, res, next) => {
 
 router.post('/view', (req, res, next) => {
   'use strict'
-  mongodb.database.collection('students').findOne({
-    _id: mongodb.ObjectId(req.body.id)
-  }, (err, result) => {
-    if (err) console.log(err)
-    res.send(result)
-  })
+  pouchdb.db
+    .get(req.body.id)
+    .then((doc) => {
+      res.send(doc)
+    })
+    .catch((err) => {
+      console.log(req.body.id)
+      console.log(err)
+    })
 })
 module.exports = router

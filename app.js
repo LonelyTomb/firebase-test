@@ -15,6 +15,12 @@ let edit = require('./routes/edit')
 
 const app = express()
 const connection = require('./mongo-init')
+if (connection) {
+  console.log('database connected')
+  // connection.db.info().then(function (info) {
+  //   console.log(info)
+  // })
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

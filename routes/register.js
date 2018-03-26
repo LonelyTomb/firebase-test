@@ -1,6 +1,6 @@
 let express = require('express')
 let router = express.Router()
-const mongodb = require('./../mongo-init')
+const pouchdb = require('./../mongo-init')
 
 // Render Register Page
 router.get('/', (req, res, next) => {
@@ -11,11 +11,15 @@ router.get('/', (req, res, next) => {
 // Process Registration details
 router.post('/', (req, res, next) => {
   'use strict'
-  let students = mongodb.database.collection('students')
-  students.save(req.body, (err, result) => {
-    if (err) return console.log(err)
+  let students = pouchdb.db
+  students.post(
+    req.body
+  ).then((result) => {
+    console.log(req.body)
     console.log('saved to database')
     res.redirect('/users')
+  }).catch((err) => {
+    return console.log(err)
   })
 })
 

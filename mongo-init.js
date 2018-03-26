@@ -1,17 +1,7 @@
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
-const ObjectId = mongodb.ObjectID
+const PouchDB = require('pouchdb')
 
-module.exports.ObjectId = ObjectId
+let db = new PouchDB('srq')
+let remoteDB = new PouchDB('http://localhost:5984/srq')
 
-let uri = 'mongodb://lonelytomb:construct8@ds243055.mlab.com:43055/srq'
-
-let db = MongoClient.connect(uri, (err, database) => {
-  'use strict'
-  if (err) return console.log(err)
-  console.log('db connected')
-  module.exports.database = database
-  return database
-})
-
+db.sync(remoteDB, {live: true})
 module.exports.db = db

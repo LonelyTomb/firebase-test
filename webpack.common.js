@@ -9,8 +9,6 @@ const path = require('path')
  *
  */
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-
 /*
  * We've enabled commonsChunkPlugin for you. This allows your app to
  * load faster and it splits the modules you provided as entries across
@@ -35,7 +33,8 @@ module.exports = {
   entry: {
     app: path.join(__dirname, 'public/javascripts/app.js'),
     uikit: ['uikit', path.join(__dirname, 'public/stylesheets/style.scss')],
-    'uikit-icons': './node_modules/uikit/dist/js/uikit-icons.js'
+    'uikit-icons': './node_modules/uikit/dist/js/uikit-icons.js',
+    axios: 'axios'
   },
 
   output: {
@@ -88,7 +87,6 @@ module.exports = {
   },
 
   plugins: [
-    new UglifyJSPlugin(),
     new ExtractTextPlugin('css/style.css'),
     new webpack.ProvidePlugin({
       UIkit: 'uikit'

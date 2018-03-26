@@ -9,17 +9,16 @@
     <section class="uk-section uk-section-small uk-section-secondary">
         <h2 class="uk-heading-primary uk-heading-bullet uk-text-center">Registered Profiles</h2>
     </section>
-    <p><%= students['name'] %></p>
     <div class="uk-flex uk-container uk-flex-around uk-flex-wrap">
         <% for(var student in students){ %>
         <div class="uk-card uk-card-default uk-card-body uk-animation-fade uk-box-shadow-bottom">
             <div class="uk-card-header">
-                <h4 class="uk-card-title">Name: <%= students[student].name %></h4>
+                <h4 class="uk-card-title">Name: <%= students[student].doc.name%></h4>
             </div>
-            <p>Department: <%= students[student].department %></p>
-            <p>Sex: <%= students[student].gender %></p>
+            <p>Department: <%= students[student].doc.department%></p>
+            <p>Sex: <%= students[student].doc.gender%></p>
             <div class="uk-card-footer">
-                <button class="uk-button uk-button-secondary view" id=<%= students[student]._id %>>View Details</button>
+                <button class="uk-button uk-button-secondary view" id="<%= students[student].doc._id%>">View Details</button>
             </div>
         </div>
         <% } %>
